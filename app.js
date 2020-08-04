@@ -1,8 +1,37 @@
-new Vue({});
+new Vue({})
 
 var app = new Vue({
-    el: '#app',
-    data: {
-        'message': 'Hello World'
-    }
-});
+            el: "#app",
+            data() {
+                return {
+                    todos: [],
+                    todo: ""
+                }
+            },
+
+            created() {
+                this.loadLocalStorage();
+            },
+            watch: {
+                todos() {
+                    localStorage.setItem("todos", JSON.stringify(this.todos));
+                }
+            },
+            methods: {
+
+                loadLocalStorage() {
+                    const Is = JSON.parse(localStorage.getItem("todos"));
+                    console.log(ls);
+                    if (is == null) { return; }
+                    this.todos = ls;
+                    console.log(this.todos);
+                },
+                addTodo() {
+                    this.todos.push(this.todo);
+                    this.todo = "";
+                },
+                deleteTodo(index) {
+                    this.todos.splice(index, 1);
+                }
+
+            }
